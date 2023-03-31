@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 Console.WriteLine("Mongo DB Test");
 
-var client = new MongoClient();
+var client = new MongoClient("mongodb://localhost:27017");
 
 foreach (var database in client.ListDatabases().ToList())
 {
-    //  Console.WriteLine(database);
+    Console.WriteLine(database);
 }
 
 Console.WriteLine("\r\n");
@@ -17,7 +17,7 @@ var imdb = client.GetDatabase("IMDB");
 
 foreach (var collection in imdb.ListCollections().ToList())
 {
-    //Console.WriteLine(collection);
+    Console.WriteLine(collection);
 }
 
 var principlesCollection = imdb.GetCollection<BsonDocument>("titleprincipals");
@@ -26,7 +26,7 @@ var principles = principlesCollection.Find("{category:\"self\"}").Limit(10).ToLi
 
 foreach (var principle in principles)
 {
-    //Console.WriteLine(principle);
+    Console.WriteLine(principle);
 }
 
 var titles = imdb.GetCollection<BsonDocument>("TitlesBasic");
